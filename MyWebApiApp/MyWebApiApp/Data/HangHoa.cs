@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,7 +18,18 @@ namespace MyWebApiApp.Data
         public string MoTa { get; set; }
 
         [Range(0, double.MaxValue)]
-        public string DonGia { get; set; }
-        public string GiamGia { get; set; }
+        public double DonGia { get; set; }
+        public byte GiamGia { get; set; }
+
+        public int? MaLoai { get; set; }
+        [ForeignKey("MaLoai")]
+        public Loai Loai { get; set; }
+
+        public ICollection<DonHangChiTiet> DonHangChiTiets { get; set; }
+
+        public HangHoa()
+        {
+            DonHangChiTiets = new List<DonHangChiTiet>();
+        }
     }
 }
